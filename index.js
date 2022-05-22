@@ -146,9 +146,15 @@ app.delete("/categories", async function (req, res) {
 });
 
 // Callbacks
+// get all
 app.get("/callbacks", async function (req, res) {
   try {
-    const sql = `select * from callbacks;`;
+    const sql = `
+      select * from callbacks
+      left join categories
+      on callbacks.category_id = categories.category_id
+      ;
+    `;
 
     const data = await fetch(sql);
 
