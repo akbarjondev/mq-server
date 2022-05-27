@@ -1,14 +1,16 @@
 const express = require("express");
+const cors = require("cors");
 const parser = require("body-parser");
 const { fetch } = require("./src/db/db");
 const app = express();
 
 app.use(parser.json());
+app.use(cors());
 
 // Categories
 app.get("/categories", async function (req, res) {
   try {
-    const sql = `select * from categories;`;
+    const sql = `select * from categories order by category_id asc;`;
 
     const data = await fetch(sql);
 
@@ -121,6 +123,8 @@ app.delete("/categories", async function (req, res) {
   try {
     let { id } = req.body;
 
+    console.log(id);
+
     const sql = `
       delete from categories where category_id=$1
     `;
@@ -153,6 +157,7 @@ app.get("/callbacks", async function (req, res) {
       select * from callbacks
       left join categories
       on callbacks.category_id = categories.category_id
+      order by callback_id asc
       ;
     `;
 
