@@ -123,8 +123,6 @@ app.delete("/categories", async function (req, res) {
   try {
     let { id } = req.body;
 
-    console.log(id);
-
     const sql = `
       delete from categories where category_id=$1
     `;
