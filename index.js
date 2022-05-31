@@ -346,4 +346,6 @@ app.delete("/callbacks", async function (req, res) {
   }
 });
 
-app.listen(4001, () => console.log(`server ready at http://localhost:4001 🚀`));
+const port = process.env.PORT || 4001;
+
+app.listen(port, () => console.log(`server ready at http://localhost:4001 🚀`));
